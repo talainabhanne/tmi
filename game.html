@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Love Quest 🐾</title>
+  <title>Pratha's Love Quest 🐾</title>
   <style>
     body {
       margin: 0;
@@ -75,78 +75,106 @@
 </head>
 <body>
   <div class="game-box">
-    <h1 id="title">The Love Quest 🐾</h1>
-    <p id="text">You’re a fluffy cat on a mission to win Pratha’s heart. She’s the sweetest, most beautiful cat in the world. But first, you must show her your love!</p>
+    <h1 id="title">Pratha's Love Quest 🐾</h1>
+    <p id="text">Pratha, you're the most beautiful, purrfect cat in the world. One very determined (and slightly goofy) cat is trying to win your heart. What will you do?</p>
     <div class="choices" id="choices">
-      <button class="choice" onclick="nextScene('flowers')">Bring her flowers 🌸</button>
-      <button class="choice" onclick="nextScene('song')">Sing her a love song 🎶</button>
+      <button class="choice" onclick="nextScene('flowers')">Accept his flowers 🌸</button>
+      <button class="choice" onclick="nextScene('song')">Listen to his love song 🎶</button>
     </div>
   </div>
 
-  <button class="secret-btn" onclick="window.location.href='secret.html'">
+  <button class="secret-btn" onclick="alert('Meow! 🐾 You found the secret! This magical quest was made just for you, Pratha.')">
     <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Secret Cat Button">
   </button>
 
   <script>
     const scenes = {
       flowers: {
-        text: "You bring her the prettiest flowers from the garden. She purrs happily. 'You're so thoughtful!' she says. What do you do next?",
+        text: "He brings you the prettiest flowers from the garden. You purr a little. 'You're so sweet,' you say. What do you want to do next?",
         choices: [
-          { text: "Ask her to go on a date 🐾", next: "date" },
-          { text: "Roll around in the sun together ☀️", next: "sun" }
+          { text: "Go on a cute date together 🐾", next: "date" },
+          { text: "Roll in the sunshine ☀️", next: "sun" }
         ]
       },
       song: {
-        text: "You sing her a heartfelt meow melody. She blushes (yes, cats can blush). 'That was... beautiful.' What do you do next?",
+        text: "He sings the silliest yet most romantic meow melody. You blush. Yes, cats can blush. What do you want to do now?",
         choices: [
-          { text: "Confess your love 💘", next: "confess" },
-          { text: "Offer her a fish snack 🐟", next: "fish" }
+          { text: "Tell him your feelings 💘", next: "confess" },
+          { text: "Share a fish snack 🐟", next: "fish" }
         ]
       },
       date: {
-        text: "You both go on a romantic walk through the cherry blossom garden. She leans on you and says, 'I could do this forever.'",
+        text: "You go for a romantic walk under cherry blossoms. He gently nudges you and says, 'You're magical, Pratha.'",
         choices: [
-          { text: "Tell her she's your forever too 💍", next: "end_good" },
-          { text: "Lick her face playfully 😽", next: "lick" }
+          { text: "Tell him he’s your favorite floof 💍", next: "end_good" },
+          { text: "Boop his nose playfully 😽", next: "lick" }
         ]
       },
       sun: {
-        text: "You both lie in the sun. It’s peaceful and warm. She falls asleep beside you. So cute. But you still need to tell her how you feel.",
+        text: "You curl up together in a sunny spot. The warmth, the silence, his fur next to yours. It's all so peaceful.",
         choices: [
-          { text: "Whisper 'I love you' softly 💖", next: "confess" },
-          { text: "Cover her with petals 🌺", next: "end_soft" }
+          { text: "Whisper 'I love you too' 💖", next: "confess" },
+          { text: "Cover him with petals 🌺", next: "end_soft" }
         ]
       },
       confess: {
-        text: "You finally confess: 'Pratha, I love you. I want to be with you forever.' She looks at you with tears in her eyes and says...",
+        text: "You say it: 'I love you, you silly fluffy cat.' He gasps. His tail twitches with joy. What now?",
         choices: [
-          { text: "'I love you too.' 😭❤️", next: "end_good" },
-          { text: "'I’ve been waiting to hear that.' 😿💘", next: "end_good" }
+          { text: "Snuggle up and purr forever 🐾", next: "snuggle" },
+          { text: "Give him a gentle headbutt 🐱", next: "end_good" }
         ]
       },
       fish: {
-        text: "She giggles and says, 'Food before feelings?' You both laugh and share a fish. It's not romantic, but it’s real.",
+        text: "You both share a fish. 'This is the good stuff,' he says with a wink. It's goofy. But also... kinda romantic?",
         choices: [
           { text: "Then confess your love 🥹", next: "confess" },
-          { text: "Challenge her to a race 🐈💨", next: "end_fun" }
+          { text: "Race him to the tree and back 🐈💨", next: "end_fun" }
         ]
       },
       lick: {
-        text: "She purrs louder. 'You're such a weirdo,' she says—but she nuzzles you. Love is weird anyway.",
+        text: "You lick his face. He purrs like an engine. 'You're the weirdest. But I like it,' he says.",
         choices: [
-          { text: "Tell her she's perfect 💞", next: "end_good" }
+          { text: "Tell him he’s purr-fect 💞", next: "end_good" }
+        ]
+      },
+      snuggle: {
+        text: "You snuggle close. 'Can we stay like this forever?' he asks. You nod, eyes twinkling.",
+        choices: [
+          { text: "Stargaze and talk about dreams 🌌", next: "dreams" },
+          { text: "Build a pillow fort together 🏰", next: "fort" }
+        ]
+      },
+      dreams: {
+        text: "You dream out loud together: naps, treats, cuddles, adventures. A lifetime of love.",
+        choices: [
+          { text: "Make a wish on a star 🌠", next: "end_good" },
+          { text: "Fall asleep in his paws 💤", next: "end_soft" }
+        ]
+      },
+      fort: {
+        text: "You gather pillows, blankets, and build a magical cat castle. He bows: 'Queen Pratha, ruler of my heart!'",
+        choices: [
+          { text: "Give him a royal smooch 👑", next: "end_good" },
+          { text: "Propose with a shiny toy ring 💍", next: "meowposal" }
+        ]
+      },
+      meowposal: {
+        text: "He kneels (well, squats like a cat) and holds up a shiny toy ring. 'Will you be my forever cuddle buddy?'",
+        choices: [
+          { text: "Yes! Always! 💕", next: "end_good" },
+          { text: "*Happy purring sounds* 😿", next: "end_good" }
         ]
       },
       end_good: {
-        text: "You and Pratha curl up together, your tails intertwined. Love won. 💖🐾",
+        text: "You and your fluffy admirer curl up together. Your tails entwined. Hearts full. 💖🐾",
         choices: []
       },
       end_soft: {
-        text: "She wakes up smiling, covered in petals. 'This feels like a dream,' she says. 'But it's real.' 🌸💗",
+        text: "You wake up to gentle purring and petals all around. A dream come true. 🌸💗",
         choices: []
       },
       end_fun: {
-        text: "You race through the garden, laughing and tumbling. Maybe love is also found in joy. 🐱🌼",
+        text: "You race through the garden, full of laughter and leaps. Love can be fast and fun too! 🐱🌼",
         choices: []
       }
     };
