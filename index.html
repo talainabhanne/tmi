@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Pratha 🐾</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://placekitten.com/1000/800') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .overlay {
+      background-color: rgba(255, 218, 230, 0.95);
+      padding: 50px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #d63384;
+    }
+
+    p {
+      font-size: 1.3em;
+      color: #4b4453;
+      margin: 20px 0;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #f06292;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+
+    a.button:hover {
+      background-color: #ec407a;
+    }
+
+    .secret-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .secret-btn img {
+      width: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Welcome, Pratha Pokhrel 🐱💖</h1>
+    <p>This is your cozy little cat-themed corner of the internet.</p>
+    <a class="button" href="/game">Start the Love Game 💕</a>
+  </div>
+
+  <button class="secret-btn" onclick="window.location.href='/secret'">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Secret Cat Button">
+  </button>
+</body>
+</html>

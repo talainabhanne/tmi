@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Love Quest 🐾</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://placekitten.com/1000/700') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .game-box {
+      background-color: rgba(255, 218, 230, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #c2185b;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #4b4453;
+      margin-bottom: 20px;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .choice {
+      padding: 10px 20px;
+      background-color: #f06292;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    .choice:hover {
+      background-color: #ec407a;
+    }
+
+    .secret-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .secret-btn img {
+      width: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-box">
+    <h1 id="title">The Love Quest 🐾</h1>
+    <p id="text">You’re a fluffy cat on a mission to win Pratha’s heart. She’s the sweetest, most beautiful cat in the world. But first, you must show her your love!</p>
+    <div class="choices" id="choices">
+      <button class="choice" onclick="nextScene('flowers')">Bring her flowers 🌸</button>
+      <button class="choice" onclick="nextScene('song')">Sing her a love song 🎶</button>
+    </div>
+  </div>
+
+  <button class="secret-btn" onclick="window.location.href='/secret'">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Secret Cat Button">
+  </button>
+
+  <script>
+    const scenes = {
+      flowers: {
+        text: "You bring her the prettiest flowers from the garden. She purrs happily. 'You're so thoughtful!' she says. What do you do next?",
+        choices: [
+          { text: "Ask her to go on a date 🐾", next: "date" },
+          { text: "Roll around in the sun together ☀️", next: "sun" }
+        ]
+      },
+      song: {
+        text: "You sing her a heartfelt meow melody. She blushes (yes, cats can blush). 'That was... beautiful.' What do you do next?",
+        choices: [
+          { text: "Confess your love 💘", next: "confess" },
+          { text: "Offer her a fish snack 🐟", next: "fish" }
+        ]
+      },
+      date: {
+        text: "You both go on a romantic walk through the cherry blossom garden. She leans on you and says, 'I could do this forever.'",
+        choices: [
+          { text: "Tell her she's your forever too 💍", next: "end_good" },
+          { text: "Lick her face playfully 😽", next: "lick" }
+        ]
+      },
+      sun: {
+        text: "You both lie in the sun. It’s peaceful and warm. She falls asleep beside you. So cute. But you still need to tell her how you feel.",
+        choices: [
+          { text: "Whisper 'I love you' softly 💖", next: "confess" },
+          { text: "Cover her with petals 🌺", next: "end_soft" }
+        ]
+      },
+      confess: {
+        text: "You finally confess: 'Pratha, I love you. I want to be with you forever.' She looks at you with tears in her eyes and says...",
+        choices: [
+          { text: "'I love you too.' 😭❤️", next: "end_good" },
+          { text: "'I’ve been waiting to hear that.' 😿💘", next: "end_good" }
+        ]
+      },
+      fish: {
+        text: "She giggles and says, 'Food before feelings?' You both laugh and share a fish. It's not romantic, but it’s real.",
+        choices: [
+          { text: "Then confess your love 🥹", next: "confess" },
+          { text: "Challenge her to a race 🐈💨", next: "end_fun" }
+        ]
+      },
+      lick: {
+        text: "She purrs louder. 'You're such a weirdo,' she says—but she nuzzles you. Love is weird anyway.",
+        choices: [
+          { text: "Tell her she's perfect 💞", next: "end_good" }
+        ]
+      },
+      end_good: {
+        text: "You and Pratha curl up together, your tails intertwined. Love won. 💖🐾",
+        choices: []
+      },
+      end_soft: {
+        text: "She wakes up smiling, covered in petals. 'This feels like a dream,' she says. 'But it's real.' 🌸💗",
+        choices: []
+      },
+      end_fun: {
+        text: "You race through the garden, laughing and tumbling. Maybe love is also found in joy. 🐱🌼",
+        choices: []
+      }
+    };
+
+    function nextScene(key) {
+      const scene = scenes[key];
+      document.getElementById('text').textContent = scene.text;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+
+      scene.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice.text;
+        btn.className = 'choice';
+        btn.onclick = () => nextScene(choice.next);
+        choicesDiv.appendChild(btn);
+      });
+
+      if (scene.choices.length === 0) {
+        const restartBtn = document.createElement('button');
+        restartBtn.textContent = 'Play Again 💫';
+        restartBtn.className = 'choice';
+        restartBtn.onclick = () => location.reload();
+        choicesDiv.appendChild(restartBtn);
+      }
+    }
+  </script>
+</body>
+</html>
