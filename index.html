@@ -48,7 +48,7 @@
       margin-top: 10px;
     }
 
-    a.button:hover {
+    a.button: hover {
       background-color: #ec407a;
     }
 
@@ -64,6 +64,14 @@
     .secret-btn img {
       width: 40px;
     }
+    a.subtle-link:hover {
+    opacity: 1 !important;
+    text-shadow: 0 0 5px #f06292;
+  }
+    a.subtle-link:hover {
+    opacity: 1 !important;
+    text-shadow: 0 0 5px #f06292;
+  }
   </style>
 </head>
 <body>
@@ -75,10 +83,11 @@
 
   <button class="secret-btn" onclick="window.location.href='secret.html'">
     <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Secret Cat Button">
-   <a href="august1.html" style="
+
+  <a href="august1.html" class="subtle-link" style="
   position: absolute;
-  bottom: 15px;
-  left: 5px;
+  top: 15px;
+  right: 15px;
   color: #f8bbd0;
   font-size: 12px;
   text-decoration: none;
@@ -86,6 +95,7 @@
   transition: opacity 0.3s ease;
 ">🐾 meow?</a>
 
+    
   </button>
 </body>
 </html>
