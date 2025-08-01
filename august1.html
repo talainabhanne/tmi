@@ -56,44 +56,45 @@
       transform: translate(-50%, -50%);
     }
 
-    .cake {
-      margin: 20px auto;
-      width: 200px;
-      height: 150px;
-      position: relative;
-    }
+          .cake {
+        margin: 30px auto;
+        width: 120px;
+        height: 90px;
+        position: relative;
+      }
+      
+      .cake .layer {
+        width: 100%;
+        height: 30px;
+        background: #f48fb1;
+        border-radius: 8px;
+        margin-bottom: 4px;
+        box-shadow: inset 0 0 3px #e91e63;
+      }
+      
+      .cake .candle {
+        width: 6px;
+        height: 20px;
+        background: orange;
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+      
+      .cake .flame {
+        width: 8px;
+        height: 8px;
+        background: yellow;
+        border-radius: 50%;
+        position: absolute;
+        top: -35px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: flicker 0.5s infinite alternate;
+      }
 
-    .cake .layer {
-      width: 100%;
-      height: 50px;
-      background: #f48fb1;
-      border-radius: 10px;
-      margin-bottom: 5px;
-      box-shadow: inset 0 0 5px #e91e63;
-    }
-
-    .cake .candle {
-      width: 10px;
-      height: 30px;
-      background: orange;
-      position: absolute;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-
-    .cake .flame {
-      width: 10px;
-      height: 10px;
-      background: yellow;
-      border-radius: 50%;
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: flicker 0.5s infinite alternate;
-    }
 
     @keyframes flicker {
       from { opacity: 1; }
