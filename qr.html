@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Cat QR Code Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- QR Code generation library -->
+    <script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple animation for the QR code appearing */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-pink-50 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg max-w-md w-full">
+        <!-- Generator Main Content -->
+        <main class="text-center">
+            <!-- Header Section -->
+            <h1 class="text-3xl font-bold text-gray-800">Cute Cat QR Generator</h1>
+            <p class="text-gray-500 mt-2 mb-6">Create adorable QR codes with a cat in the center! 🐾</p>
+
+            <!-- Input Section -->
+            <div class="space-y-4">
+                <input type="text" id="text-input" placeholder="Enter URL or text here..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent transition">
+                <button id="generate-btn" class="w-full bg-pink-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-pink-600 active:bg-pink-700 transition-transform transform hover:scale-105">
+                    Generate QR Code
+                </button>
+            </div>
+            
+            <!-- QR Code Display Area -->
+            <div id="canvas-container" class="mt-6 flex justify-center items-center p-4 border-2 border-dashed border-gray-200 rounded-lg min-h-[300px] bg-gray-50">
+                 <p id="placeholder-text" class="text-gray-400">Your cute QR code will appear here</p>
+                <div id="canvas" class="fade-in"></div>
+            </div>
+
+            <!-- Action Buttons (Download/Copy) -->
+            <div id="action-buttons" class="mt-4 grid grid-cols-2 gap-4 hidden">
+                <button id="download-btn" class="w-full bg-purple-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-purple-600 active:bg-purple-700 transition-transform transform hover:scale-105">
+                    Download PNG
+                </button>
+                <button id="copy-btn" class="w-full bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 active:bg-blue-700 transition-transform transform hover:scale-105">
+                    Copy Image
+                </button>
+            </div>
+            <!-- Feedback message area -->
+            <div id="copy-feedback" class="text-sm text-gray-600 mt-3 h-5 transition-opacity duration-300 opacity-0"></div>
+        </main>
+    </div>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+            const textInput = document.getElementById('text-input');
+            const generateBtn = document.getElementById('generate-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const actionButtons = document.getElementById('action-buttons');
+            const canvasDiv = document.getElementById('canvas');
+            const placeholderText = document.getElementById('placeholder-text');
+            const copyFeedback = document.getElementById('copy-feedback');
+            
+            const catImageUrl = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐈</text></svg>';
+
+            let qrCodeInstance;
+            
+            const generateQrCode = () => {
+                const data = textInput.value.trim();
+                if (!data) {
+                    textInput.focus();
+                    textInput.classList.add('border-red-500');
+                    setTimeout(() => textInput.classList.remove('border-red-500'), 2000);
+                    return;
+                }
+                
+                canvasDiv.innerHTML = '';
+                placeholderText.style.display = 'none';
+
+                qrCodeInstance = new QRCodeStyling({
+                    width: 280,
+                    height: 280,
+                    data: data,
+                    image: catImageUrl,
+                    dotsOptions: { color: "#581c87", type: "rounded" },
+                    backgroundOptions: { color: "#fdf4ff" },
+                    imageOptions: { crossOrigin: "anonymous", margin: 8, imageSize: 0.35 },
+                    cornersSquareOptions: { type: "extra-rounded", color: "#a21caf" },
+                    cornersDotOptions: { type: "dot", color: "#a21caf" },
+                    qrOptions: { errorCorrectionLevel: 'H' }
+                });
+                
+                qrCodeInstance.append(canvasDiv);
+                actionButtons.classList.remove('hidden');
+            };
+            
+            // Event Listeners
+            generateBtn.addEventListener('click', generateQrCode);
+            textInput.addEventListener('keydown', (e) => e.key === 'Enter' && generateQrCode());
+            
+            downloadBtn.addEventListener('click', () => {
+                if (qrCodeInstance) {
+                    qrCodeInstance.download({ name: "cute-cat-qr", extension: "png" });
+                }
+            });
+
+            copyBtn.addEventListener('click', () => {
+                if (!qrCodeInstance) return;
+
+                copyFeedback.textContent = "Right-click the QR and select 'Copy Image'";
+                copyFeedback.classList.remove('opacity-0');
+                
+                copyBtn.disabled = true;
+                copyBtn.textContent = 'Ready to Copy!';
+                
+                setTimeout(() => {
+                    copyFeedback.classList.add('opacity-0');
+                    copyBtn.disabled = false;
+                    copyBtn.textContent = 'Copy Image';
+                }, 4000);
+            });
+        });
+    </script>
+</body>
+</html>
+
