@@ -64,17 +64,37 @@
     .secret-btn img {
       width: 40px;
     }
+    
     a.subtle-link:hover {
-    opacity: 1 !important;
-    text-shadow: 0 0 5px #f06292;
-  }
-    a.subtle-link:hover {
-    opacity: 1 !important;
-    text-shadow: 0 0 5px #f06292;
-  }
+      opacity: 1 !important;
+      text-shadow: 0 0 5px #f06292;
+    }
+
+    .qr-code-link {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      display: block;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .qr-code-link:hover {
+      opacity: 1;
+    }
+
+    .qr-code-link img {
+      width: 40px;
+      height: auto;
+    }
+
   </style>
 </head>
 <body>
+  <a href="qr.html" class="qr-code-link">
+    <img src="https://cdn-icons-png.flaticon.com/512/714/714390.png" alt="QR Code Icon">
+  </a>
+
   <div class="overlay">
     <h1>Welcome, Pratha Pokhrel 🐱💖</h1>
     <p>This is your cozy little cat-themed corner of the internet.</p>
@@ -83,7 +103,8 @@
 
   <button class="secret-btn" onclick="window.location.href='secret.html'">
     <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Secret Cat Button">
-
+  </button>
+  
   <a href="august1.html" class="subtle-link" style="
   position: absolute;
   top: 15px;
@@ -95,7 +116,5 @@
   transition: opacity 0.3s ease;
 ">🐾 meow?</a>
 
-    
-  </button>
 </body>
 </html>
