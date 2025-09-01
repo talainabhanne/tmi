@@ -78,7 +78,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Secret Cat Button">
   </button>
 
-    <script type="module">
+   <script type="module">
         document.addEventListener('DOMContentLoaded', () => {
             const textInput = document.getElementById('text-input');
             const generateBtn = document.getElementById('generate-btn');
@@ -89,9 +89,12 @@
             const placeholderText = document.getElementById('placeholder-text');
             const copyFeedback = document.getElementById('copy-feedback');
             
-            const catImageUrl = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐈</text></svg>';
+            // Replaced the emoji with a cat icon URL
+            const catImageUrl = 'https://cdn-icons-png.flaticon.com/512/126/126488.png';
 
             let qrCodeInstance;
+            
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
             const generateQrCode = () => {
                 const data = textInput.value.trim();
@@ -135,12 +138,19 @@
             copyBtn.addEventListener('click', () => {
                 if (!qrCodeInstance) return;
 
-                copyFeedback.textContent = "Right-click the QR and select 'Copy Image'";
+                // Provide device-specific instructions for copying/saving the image.
+                if (isMobile) {
+                    copyFeedback.textContent = "Tap & Hold the QR above to Save or Copy";
+                } else {
+                    copyFeedback.textContent = "Right-click the QR and select 'Copy Image'";
+                }
+
                 copyFeedback.classList.remove('opacity-0');
                 
                 copyBtn.disabled = true;
-                copyBtn.textContent = 'Ready to Copy!';
+                copyBtn.textContent = 'Ready!';
                 
+                // Reset the button and hide the message after a few seconds
                 setTimeout(() => {
                     copyFeedback.classList.add('opacity-0');
                     copyBtn.disabled = false;
