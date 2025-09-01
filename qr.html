@@ -78,7 +78,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Secret Cat Button">
   </button>
 
-   <script type="module">
+  <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
         const textInput = document.getElementById('text-input');
         const generateBtn = document.getElementById('generate-btn');
@@ -141,23 +141,31 @@
             });
         };
 
-        // Generate on button click or enter key
         generateBtn.addEventListener('click', generateQrCode);
         textInput.addEventListener('keydown', (e) => e.key === 'Enter' && generateQrCode());
 
-        // Download button
+        // 📥 Download button
         downloadBtn.addEventListener('click', () => {
             if (!latestDataURL) return;
 
-            const link = document.createElement('a');
-            link.href = latestDataURL;
-            link.download = "cute-cat-qr.png";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            if (isMobile) {
+                // On mobile, open image in new tab so user can long-press and save
+                window.open(latestDataURL, '_blank');
+                copyFeedback.textContent = "Opened image — long‑press to save.";
+                copyFeedback.classList.remove('opacity-0');
+                setTimeout(() => copyFeedback.classList.add('opacity-0'), 4000);
+            } else {
+                // On desktop, trigger direct download
+                const link = document.createElement('a');
+                link.href = latestDataURL;
+                link.download = "cute-cat-qr.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         });
 
-        // Copy button
+        // 📋 Copy button
         copyBtn.addEventListener('click', async () => {
             if (!latestDataURL) return;
 
@@ -185,12 +193,11 @@
             }, 4000);
         });
 
-        // Show fallback copy/save instructions
         function fallbackCopyMessage() {
             if (isMobile) {
-                copyFeedback.textContent = "Tap & Hold the QR to Save or Copy";
+                copyFeedback.textContent = "Tap & hold the QR to save or copy.";
             } else {
-                copyFeedback.textContent = "Right-click the QR and select 'Copy Image'";
+                copyFeedback.textContent = "Right-click the QR and select 'Copy Image'.";
             }
         }
     });
